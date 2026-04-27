@@ -1,9 +1,8 @@
 package com.younes.saas.infra.adapters.in.web.product;
 
-import com.younes.saas.domain.common.PageResult;
+import com.younes.saas.application.common.PageResult;
+import com.younes.saas.application.ports.in.product.ProductQueryUseCase;
 import com.younes.saas.domain.models.Product;
-import com.younes.saas.domain.ports.in.product.GetProductUseCase;
-import com.younes.saas.domain.ports.in.product.ListProductsUseCase;
 import com.younes.saas.infra.adapters.in.web.common.PageResponse;
 import com.younes.saas.infra.adapters.in.web.product.dto.ProductResponse;
 import com.younes.saas.infra.adapters.in.web.product.mapper.ProductMapper;
@@ -17,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 public class ProductQueryController {
 
-    private final ListProductsUseCase listProductsUseCase;
-    private final GetProductUseCase getProductUseCase;
+    private final ProductQueryUseCase queryUseCase;
     private final ProductMapper mapper;
 
     @GetMapping
@@ -26,7 +24,7 @@ public class ProductQueryController {
             @RequestParam(name = "page", defaultValue = "0") final int page,
             @RequestParam(name = "size", defaultValue = "10") final int size
     ) {
-        PageResult<Product> domainProducts = listProductsUseCase.execute(page, size);
+        PageResult<Product> domainProducts = this.queryUseCase.listProducts(page, size);
         PageResponse<ProductResponse> response = mapper.toPageResponse(domainProducts);
         return ResponseEntity.ok(response);
     }
@@ -36,7 +34,7 @@ public class ProductQueryController {
             @PathVariable("id")
             @NotNull(message = "Product ID cannot be null") final String id
     ) {
-        Product product = this.getProductUseCase.execute(id);
+        Product product = this.queryUseCase.getProductById(id);
         return ResponseEntity.ok(mapper.toResponse(product));
     }
 }

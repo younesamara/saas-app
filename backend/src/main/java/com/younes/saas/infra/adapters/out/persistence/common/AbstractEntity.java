@@ -55,5 +55,7 @@ public class AbstractEntity {
         if (this.deleted == null) {
             this.deleted = false;
         }
+        if (this.createdBy == null)
+            this.createdBy = "SYSTEM";
     }
 }

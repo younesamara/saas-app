@@ -1,9 +1,8 @@
 package com.younes.saas.infra.adapters.in.web.stockmvt;
 
-import com.younes.saas.domain.common.PageResult;
+import com.younes.saas.application.common.PageResult;
+import com.younes.saas.application.ports.in.stockmvt.StockMvtQueryUseCase;
 import com.younes.saas.domain.models.StockMvt;
-import com.younes.saas.domain.ports.in.stockmvt.GetStockMvtUseCase;
-import com.younes.saas.domain.ports.in.stockmvt.ListStockMvtsUseCase;
 import com.younes.saas.infra.adapters.in.web.common.PageResponse;
 import com.younes.saas.infra.adapters.in.web.stockmvt.dto.StockMvtResponse;
 import com.younes.saas.infra.adapters.in.web.stockmvt.mapper.StockMvtWebMapper;
@@ -17,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class StockMvtQueryController {
 
-    private final ListStockMvtsUseCase stockMvtsUseCase;
-    private final GetStockMvtUseCase stockMvtUseCase;
+    private final StockMvtQueryUseCase queryUseCase;
     private final StockMvtWebMapper mapper;
 
     @GetMapping
@@ -27,7 +25,7 @@ public class StockMvtQueryController {
             @RequestParam(name = "size", defaultValue = "10") final int size
     ) {
 
-        PageResult<StockMvt> domainMovements = stockMvtsUseCase.execute(page, size);
+        PageResult<StockMvt> domainMovements = this.queryUseCase.listStockMvts(page, size);
         PageResponse<StockMvtResponse> response = mapper.toPageResponse(domainMovements);
 
         return ResponseEntity.ok(response);
@@ -39,7 +37,7 @@ public class StockMvtQueryController {
             @NotNull(message = "Stock movement ID cannot be null")
             String id) {
 
-        StockMvt stockMvt = this.stockMvtUseCase.execute(id);
+        StockMvt stockMvt = this.queryUseCase.getStockMvtById(id);
         return ResponseEntity.ok(mapper.toResponse(stockMvt));
     }
 

@@ -10,6 +10,11 @@ public class Category {
     private String description;
     private List<Product> products;
 
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public String getId() {
         return id;
     }

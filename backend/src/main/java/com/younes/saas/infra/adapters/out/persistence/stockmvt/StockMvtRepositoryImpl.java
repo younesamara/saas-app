@@ -1,11 +1,10 @@
 package com.younes.saas.infra.adapters.out.persistence.stockmvt;
 
-import com.younes.saas.domain.common.PageResult;
+import com.younes.saas.application.common.PageResult;
 import com.younes.saas.domain.models.StockMvt;
-import com.younes.saas.domain.ports.out.stockmvt.StockMvtRepository;
+import com.younes.saas.application.ports.out.StockMvtRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

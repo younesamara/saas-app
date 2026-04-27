@@ -1,8 +1,11 @@
 package com.younes.saas.infra.adapters.in.web.advice;
 
 import com.younes.saas.domain.exceptions.ResourceNotFoundException;
+import com.younes.saas.infra.adapters.out.persistence.exceptions.*;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,12 +15,32 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+
+    @ExceptionHandler(value = BusinessException.class)
+    public ResponseEntity<ErrorResponse> handleException(
+            final BusinessException ex,
+            final HttpServletRequest request
+    ) {
+        log.warn("Entity not found", ex);
+
+        final ErrorResponse errorResponse = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        final HttpStatus status = getHttpStatus(ex);
+
+        return ResponseEntity.status(status)
+                .body(errorResponse);
+    }
 
     @ExceptionHandler(value = {ResourceNotFoundException.class})
     public ResponseEntity<ErrorResponse> handleException(
@@ -69,5 +92,17 @@ public class GlobalExceptionHandler {
                 .body(errorResponse);
     }
 
+    private HttpStatus getHttpStatus(final BusinessException ex) {
+        if (ex instanceof DuplicateResourceException) {
+            return CONFLICT;
+        } else if (ex instanceof UnauthorizedException) {
+            return UNAUTHORIZED;
+        } else if (ex instanceof TenantProvisioningException) {
+            return INTERNAL_SERVER_ERROR;
+        } else if (ex instanceof InvalidRequestException) {
+            return BAD_REQUEST;
+        }
+        return BAD_REQUEST;
+    }
 
 }

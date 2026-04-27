@@ -1,6 +1,6 @@
 package com.younes.saas.infra.adapters.out.persistence.common;
 
-import com.younes.saas.domain.common.PageResult;
+import com.younes.saas.application.common.PageResult;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
 

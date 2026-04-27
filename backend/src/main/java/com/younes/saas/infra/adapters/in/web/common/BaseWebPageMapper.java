@@ -1,6 +1,6 @@
 package com.younes.saas.infra.adapters.in.web.common;
 
-import com.younes.saas.domain.common.PageResult;
+import com.younes.saas.application.common.PageResult;
 
 /**
  * @param <D> The pure Domain model

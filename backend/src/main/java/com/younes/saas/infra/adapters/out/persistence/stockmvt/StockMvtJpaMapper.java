@@ -12,6 +12,6 @@ public interface StockMvtJpaMapper extends BasePageMapper<JpaStockMvt,StockMvt> 
     StockMvt toDomain(JpaStockMvt entity);
 
     @Mapping(source = "productId", target = "product.id")
-    JpaStockMvt toJpa(StockMvt model);
+    JpaStockMvt toJpaEntity(StockMvt model);
 
 }

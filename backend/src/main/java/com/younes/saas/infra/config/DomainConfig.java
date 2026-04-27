@@ -9,7 +9,7 @@ import org.springframework.context.annotation.FilterType;
 
 @Configuration
 @ComponentScan(
-        basePackages = "com.younes.saas.application.services",
+        basePackages = "com.younes.saas.application.usecase",
         includeFilters = {
                 @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Query.class),
                 @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Command.class)

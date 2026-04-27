@@ -1,8 +1,8 @@
 package com.younes.saas.infra.adapters.out.persistence.product;
 
-import com.younes.saas.domain.common.PageResult;
+import com.younes.saas.application.common.PageResult;
 import com.younes.saas.domain.models.Product;
-import com.younes.saas.domain.ports.out.product.ProductRepository;
+import com.younes.saas.application.ports.out.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

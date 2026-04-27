@@ -10,5 +10,5 @@ public interface ProductJpaMapper extends BasePageMapper<JpaProduct, Product> {
 
     Product toDomain(JpaProduct entity);
 
-    JpaProduct toJpa(Product model);
+    JpaProduct toJpaEntity(Product model);
 }
