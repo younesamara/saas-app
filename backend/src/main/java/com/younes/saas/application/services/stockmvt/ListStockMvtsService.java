@@ -1,12 +1,12 @@
 package com.younes.saas.application.services.stockmvt;
 
-import com.younes.saas.application.annotations.UseCase;
+import com.younes.saas.application.annotations.Query;
 import com.younes.saas.domain.common.PageResult;
 import com.younes.saas.domain.models.StockMvt;
 import com.younes.saas.domain.ports.in.stockmvt.ListStockMvtsUseCase;
 import com.younes.saas.domain.ports.out.stockmvt.StockMvtRepository;
 
-@UseCase
+@Query
 public class ListStockMvtsService implements ListStockMvtsUseCase {
 
     private final StockMvtRepository stockMvtRepository;

@@ -1,12 +1,12 @@
 package com.younes.saas.application.services.category;
 
-import com.younes.saas.application.annotations.UseCase;
+import com.younes.saas.application.annotations.Query;
 import com.younes.saas.domain.exceptions.ResourceNotFoundException;
 import com.younes.saas.domain.models.Category;
 import com.younes.saas.domain.ports.in.category.GetCategoryUseCase;
 import com.younes.saas.domain.ports.out.category.CategoryRepository;
 
-@UseCase
+@Query
 public class GetCategoryService implements GetCategoryUseCase {
 
     private final CategoryRepository categoryRepository;

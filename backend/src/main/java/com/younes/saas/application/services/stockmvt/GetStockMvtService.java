@@ -1,12 +1,12 @@
 package com.younes.saas.application.services.stockmvt;
 
-import com.younes.saas.application.annotations.UseCase;
+import com.younes.saas.application.annotations.Query;
 import com.younes.saas.domain.exceptions.ResourceNotFoundException;
 import com.younes.saas.domain.models.StockMvt;
 import com.younes.saas.domain.ports.in.stockmvt.GetStockMvtUseCase;
 import com.younes.saas.domain.ports.out.stockmvt.StockMvtRepository;
 
-@UseCase
+@Query
 public class GetStockMvtService implements GetStockMvtUseCase {
 
     private final StockMvtRepository stockMvtRepository;

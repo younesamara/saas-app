@@ -1,13 +1,12 @@
 package com.younes.saas.application.services.product;
 
-import com.younes.saas.application.annotations.UseCase;
-import com.younes.saas.domain.common.PageResult;
+import com.younes.saas.application.annotations.Query;
 import com.younes.saas.domain.exceptions.ResourceNotFoundException;
 import com.younes.saas.domain.models.Product;
 import com.younes.saas.domain.ports.in.product.GetProductUseCase;
 import com.younes.saas.domain.ports.out.product.ProductRepository;
 
-@UseCase
+@Query
 public class GetProductService implements GetProductUseCase {
 
     private final ProductRepository productRepository;
